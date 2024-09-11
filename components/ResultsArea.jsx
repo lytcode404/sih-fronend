@@ -17,7 +17,7 @@ const ResultsArea = ({ articleResults, googleResults }) => {
             {articleResults && articleResults.length > 0 && (
                 <div className="mb-6">
                     <h2 className="text-xl font-semibold mb-4 text-black">
-                        Article Results:
+                        Article Results ( Results are under improvement):
                     </h2>
                     <div className="grid gap-4">
                         {articleResults.map((result, index) => (

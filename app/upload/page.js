@@ -36,8 +36,17 @@ export default function Upload() {
       method: "POST",
       url: "https://api.apyhub.com/ai/summarize-documents/file",
       headers: {
-        "apy-token":
-          "APY0ZQ1tdQuqwkRVGx5tBtWAO0tuG0h8NAg1Z78pp7Uxwtvebzy14B5DvlUfboeDww5D",
+        "apy-token": process.env.NEXT_PUBLIC_MLTOKEN1,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    };
+
+    const options2 = {
+      method: "POST",
+      url: "https://api.apyhub.com/ai/summarize-documents/file",
+      headers: {
+        "apy-token": process.env.NEXT_PUBLIC_MLTOKEN2,
         "Content-Type": "multipart/form-data",
       },
       data: formData,
@@ -52,10 +61,15 @@ export default function Upload() {
       setSummary(summaryText);
       handleFetchData(summaryText); // Pass the summary to the next function
     } catch (err) {
-      setError("Error summarizing the document");
-      console.error(err);
-    } finally {
-      // setLoading(false);
+      try {
+        const response = await axios.request(options2);
+        const summaryText = response.data.data.summary;
+        setSummary(summaryText);
+        handleFetchData(summaryText); // Pass the summary to the next function
+      } catch (err) {
+        setError("Under Construction Meanwhile try Search Fucntionality! ");
+        console.error(err);
+      }
     }
   };
 
@@ -167,9 +181,7 @@ export default function Upload() {
           )}
 
           <div className={`text-white p-2 rounded-md px-6 bg-blue-600 my-5`}>
-            {loading
-              ? "Fetching Results..."
-              : "Upload PDF to Search"}
+            {loading ? "Fetching Results ( Wait 30 sec, Server is slow )..." : "Upload PDF to Search"}
           </div>
 
           {(articleResults.length || googleResults.length) && (
