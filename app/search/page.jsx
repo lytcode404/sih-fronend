@@ -128,7 +128,7 @@ const UnifiedSearch = () => {
                                 }`}
                                 disabled={isLoading}
                             >
-                                {/* {isLoading ? "Searching..." : "Search"} */}
+                                {isLoading ? "Searching..." : "Search"}
                                 Search
                             </button>
                         </div>
@@ -138,11 +138,11 @@ const UnifiedSearch = () => {
                     <div
                         className={`text-white p-2 rounded-md px-6 bg-blue-600 my-5`}
                     >
-                        {/* {isLoading
+                        {isLoading
                             ? "Fetching Results..."
                             : (articleResults.length > 0 || googleResults.length > 0)
                             ? "Search Results"
-                            : "Type the case details to search"} */}
+                            : "Type the case details to search"}
                             Results
                     </div>
                     {(articleResults.length || googleResults.length) && (
