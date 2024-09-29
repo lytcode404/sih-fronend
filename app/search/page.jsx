@@ -41,8 +41,8 @@ const UnifiedSearch = () => {
             console.log("API response:", articleData);
 
             // Ensure articleData is an array
-            const resultsArray = articleData.data;
-            console.log(articleData.data);
+            const resultsArray = articleData;
+            console.log(articleData);
             setArticleResults(resultsArray);
 
             // Perform Google search using the article titles
