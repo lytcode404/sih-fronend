@@ -2,13 +2,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ResultsArea from "@/components/ResultsArea";
-import { usePathname } from "next/navigation";
-// import { useStore } from "@/store/globalStore";
 
 const UnifiedSearch = () => {
-    const pathname = usePathname();
-    console.log("pathname", pathname);
-
     // const { activeNavLink, setActiveNavLink } = useStore();
 
     // useEffect(() => {
