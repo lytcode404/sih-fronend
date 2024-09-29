@@ -1,17 +1,18 @@
 import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { signInWithGoogle, signOut } from "@/services/authService";
+import Link from "next/link";
 
 const Nav = () => {
     const { user, loading } = useAuth();
 
-    const handleGoogleSignIn = async () => {
-        await signInWithGoogle();
-    };
+    // const handleGoogleSignIn = async () => {
+    //     await signInWithGoogle();
+    // };
 
-    const handleGoogleSignOut = async () => {
-        await signOut();
-    };
+    // const handleGoogleSignOut = async () => {
+    //     await signOut();
+    // };
 
     return (
         <>
@@ -59,7 +60,7 @@ const Nav = () => {
                                 <a
                                     href="#feature"
                                     title="Features"
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
+                                    className={`text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 `}
                                 >
                                     Features
                                 </a>
@@ -80,14 +81,23 @@ const Nav = () => {
                                 <a
                                     href="/upload"
                                     title="Upload PDF"
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
+                                    className={`text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 ${
+                                        window.location.href.includes("upload")
+                                            ? "text-blue-500 font-bold"
+                                            : ""
+                                    }`}
                                 >
                                     Upload PDF
                                 </a>
+
                                 <a
                                     href="/search"
                                     title="Search"
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
+                                    className={`text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 ${
+                                        window.location.href.includes("search")
+                                            ? "text-blue-500 font-bold  "
+                                            : ""
+                                    }`}
                                 >
                                     Search
                                 </a>
@@ -103,4 +113,3 @@ const Nav = () => {
 };
 
 export default Nav;
-

@@ -9,7 +9,7 @@ export async function POST(req) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ input_text: query }),
+            body: JSON.stringify({ query: query }),
         });
         const data = await res.json();
 

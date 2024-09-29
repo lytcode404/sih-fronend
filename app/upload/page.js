@@ -7,6 +7,7 @@ const PdfUploader = () => {
     const [responseText, setResponseText] = useState("");
     const [summary, setSummary] = useState("");
     const [loading, setLoading] = useState(false);
+    const [summariseBtnLoading, setSummariseBtnLoading] = useState(false);
     const [error, setError] = useState("");
 
     const handleFileChange = (e) => {
@@ -54,6 +55,45 @@ const PdfUploader = () => {
         }
     };
 
+    const handleSummarisePdf = async (event) => {
+        event.preventDefault();
+
+        if (!pdf) {
+            setError("Please upload a file.");
+            return;
+        }
+        let formData = new FormData();
+        formData.append("pdf", pdf);
+        formData.append("question", "summarise this pdf...");
+
+        setSummariseBtnLoading(true);
+        try {
+            let response = await fetch(
+                "https://ask-pdf-etif.onrender.com/process_pdf",
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            let result = await response.json();
+            setResponseText(result.answer || `Error: ${result.error}`);
+
+            console.log(result);
+        } catch (error) {
+            console.error("Error:", error);
+            setError(
+                "An error occurred. Please check the console for details."
+            );
+        } finally {
+            setSummariseBtnLoading(false);
+        }
+    };
+
     return (
         <div
             style={{
@@ -77,13 +117,27 @@ const PdfUploader = () => {
                     Upload PDF
                 </h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="flex w-full justify-between mr-5">
-                        <input
-                            type="file"
-                            accept="application/pdf"
-                            onChange={handleFileChange}
-                            className="p-2 border border-gray-300 text-gray-800 rounded-lg mt-4"
-                        />
+                    <div className="w-full flex justify-between">
+                        <div className="flex  justify-between mr-5  ">
+                            <input
+                                type="file"
+                                accept="application/pdf"
+                                onChange={handleFileChange}
+                                className="p-2 border border-gray-300 text-gray-800 rounded-lg mt-4"
+                            />
+                        </div>
+                        <button
+                            onClick={handleSummarisePdf}
+                            className={`   bg-green-500 text-white font-bold  px-4 rounded-md hover:bg-green-600 transition duration-300 ml-1 ${
+                                summariseBtnLoading
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : ""
+                            }`}
+                        >
+                            {summariseBtnLoading
+                                ? "Processing..."
+                                : "Summarise PDF"}
+                        </button>
                     </div>
                     {error && <p className="text-red-500 mt-4">{error}</p>}
 
@@ -112,7 +166,7 @@ const PdfUploader = () => {
                                 loading ? "opacity-50 cursor-not-allowed" : ""
                             }`}
                         >
-                            Submit
+                            {loading ? "Processing..." : "Submit"}
                         </button>
                     </div>
                 </form>

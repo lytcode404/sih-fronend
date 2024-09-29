@@ -26,19 +26,9 @@ const ResultsArea = ({ articleResults, googleResults }) => {
                                 className="border border-gray-200 p-4 rounded-lg shadow-sm bg-white"
                             >
                                 <h3 className="font-bold text-lg text-black">
-                                    {result.title || "Untitled"}
+                                    {result["chapter-title"] || "Untitled"}
                                 </h3>
-                                {result.article_number && (
-                                    <p className="text-black">
-                                        Article Number: {result.article_number}
-                                    </p>
-                                )}
-                                {result.similarity_score !== undefined && (
-                                    <p className="text-black">
-                                        Similarity Score:{" "}
-                                        {result.similarity_score.toFixed(4)}
-                                    </p>
-                                )}
+
                                 {Object.entries(result).map(
                                     ([key, value]) =>
                                         ![
