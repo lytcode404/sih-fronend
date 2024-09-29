@@ -26,19 +26,23 @@ const UnifiedSearch = () => {
 
         try {
             // Search your API for articles
-            const articleRes = await fetch(`/api/search`, {
+            const articleRes = await fetch(
+              `https://commercial-court-api.onrender.com/find_similar_sections`,
+              {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                  "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ query }),
-            });
+              }
+            );
 
             const articleData = await articleRes.json();
-            console.log("API response:", articleData.data);
+            console.log("API response:", articleData);
 
             // Ensure articleData is an array
             const resultsArray = articleData.data;
+            console.log(articleData.data);
             setArticleResults(resultsArray);
 
             // Perform Google search using the article titles
@@ -124,7 +128,8 @@ const UnifiedSearch = () => {
                                 }`}
                                 disabled={isLoading}
                             >
-                                {isLoading ? "Searching..." : "Search"}
+                                {/* {isLoading ? "Searching..." : "Search"} */}
+                                Search
                             </button>
                         </div>
                     </form>
@@ -133,11 +138,12 @@ const UnifiedSearch = () => {
                     <div
                         className={`text-white p-2 rounded-md px-6 bg-blue-600 my-5`}
                     >
-                        {isLoading
+                        {/* {isLoading
                             ? "Fetching Results..."
-                            : articleResults.length || googleResults.length
+                            : (articleResults.length > 0 || googleResults.length > 0)
                             ? "Search Results"
-                            : "Type the case details to search"}
+                            : "Type the case details to search"} */}
+                            Results
                     </div>
                     {(articleResults.length || googleResults.length) && (
                         <ResultsArea
