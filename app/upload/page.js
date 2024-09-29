@@ -5,7 +5,6 @@ const PdfUploader = () => {
     const [pdf, setPdf] = useState(null);
     const [question, setQuestion] = useState("");
     const [responseText, setResponseText] = useState("");
-    const [summary, setSummary] = useState("");
     const [loading, setLoading] = useState(false);
     const [summariseBtnLoading, setSummariseBtnLoading] = useState(false);
     const [error, setError] = useState("");
@@ -106,15 +105,17 @@ const PdfUploader = () => {
             }}
         >
             <section
-                className="bg-gray-100 p-8 shadow-md rounded-lg max-w-3xl mx-auto"
+                className="bg-white p-8 shadow-xl rounded-lg max-w-3xl mx-auto"
                 style={{
                     backgroundImage: "url('/background-search.jpg')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    borderRadius: "12px",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                 }}
             >
-                <h1 className="text-2xl font-bold mb-6 text-black">
-                    Upload PDF
+                <h1 className="text-3xl font-semibold mb-6 text-gray-900 text-center">
+                    Upload and Ask
                 </h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="w-full flex justify-between">
@@ -139,12 +140,16 @@ const PdfUploader = () => {
                                 : "Summarise PDF"}
                         </button>
                     </div>
-                    {error && <p className="text-red-500 mt-4">{error}</p>}
 
-                    <div className=" text-gray-900">
+                    {error && (
+                        <p className="text-red-500 text-center mt-2">{error}</p>
+                    )}
+
+                    {/* Question Section */}
+                    <div className="text-gray-900">
                         <label
                             htmlFor="question"
-                            className="block font-medium mb-1 text-gray-900"
+                            className="block text-lg font-medium mb-2 text-gray-700"
                         >
                             Ask a question:
                         </label>
@@ -155,14 +160,17 @@ const PdfUploader = () => {
                             value={question}
                             onChange={(e) => setQuestion(e.target.value)}
                             required
-                            className="w-full border border-gray-300 rounded-md col-span-5 p-2"
+                            className="w-full p-3 border border-gray-300 rounded-md shadow-sm hover:shadow-md transition-shadow duration-200 focus:border-blue-500"
+                            rows="5"
+                            placeholder="Enter your question..."
                         />
                     </div>
-                    <div className="flex justify-end">
-                        {" "}
+
+                    {/* Submit Button */}
+                    <div className="flex justify-center">
                         <button
                             type="submit"
-                            className={`max-w-fit col-span-1 bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ml-1 ${
+                            className={`bg-gradient-to-r from-purple-400 via-blue-500 to-blue-600 text-white py-3 px-8 rounded-lg hover:from-purple-500 hover:to-blue-700 transition duration-200 shadow-md${
                                 loading ? "opacity-50 cursor-not-allowed" : ""
                             }`}
                         >
@@ -171,8 +179,11 @@ const PdfUploader = () => {
                     </div>
                 </form>
 
-                <h2 className="text-xl font-bold text-gray-900 ">Response:</h2>
-                <div className="mt-3 bg-gray-100 p-3 rounded-md min-h-[30px] text-gray-700">
+                {/* Response Section */}
+                <h2 className="text-2xl font-semibold text-gray-900 mt-8 text-center">
+                    Response:
+                </h2>
+                <div className="mt-4 bg-gray-100 p-5 rounded-lg text-gray-700 shadow-inner min-h-[40px] text-center">
                     {responseText || "No response yet."}
                 </div>
             </section>
