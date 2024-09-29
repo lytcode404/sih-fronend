@@ -122,7 +122,7 @@ const UnifiedSearch = () => {
             >
                 {isLoading
                     ? "Fetching Results..."
-                    : articleResults.length || googleResults.length
+                    : articleResults.length >0 || googleResults.length
                     ? "Search Results"
                     : "Type the case details to search"}
             </div>

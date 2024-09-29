@@ -26,7 +26,7 @@ const Nav = () => {
                                 className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
                             >
                                 <img
-                                    className="w-full h-12"
+                                    className="w-full h-16" // Increased the height from h-12 to h-16
                                     src="logo.jpeg"
                                     alt="Logo"
                                 />
@@ -70,13 +70,6 @@ const Nav = () => {
                                 >
                                     How it Works
                                 </a>
-                                {/*<a
-                                    href="#"
-                                    title="About"
-                                    className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
-                                >
-                                    About
-                                </a> */}
                                 <a
                                     href="/upload"
                                     title="Upload PDF"
@@ -93,8 +86,6 @@ const Nav = () => {
                                 </a>
                             </div>
                         </div>
-
-                        {/* Sign-in/Sign-out section commented out */}
                     </div>
                 </div>
             </header>
@@ -103,4 +94,5 @@ const Nav = () => {
 };
 
 export default Nav;
+
 
