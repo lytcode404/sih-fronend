@@ -46,7 +46,7 @@ const Feature = () => {
                                 alt={feedback.altText}
                             />
                             <p className="text-blue-600 underline text-lg font-semibold mb-2">
-                                {feedback.highlight}
+                               {index+1} {feedback.highlight}
                             </p>
                             <ul className="list-disc list-inside text-lg text-gray-600">
                                 {feedback.points.map((point, idx) => (
